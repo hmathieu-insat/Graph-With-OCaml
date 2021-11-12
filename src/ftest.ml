@@ -28,6 +28,8 @@ let () =
 
   (* Open file *)
   let graph = from_file infile in
+
+  (* Tests *)
   let graph2 = clone_nodes graph in
 
   (* Rewrite the graph that has been read. *)
