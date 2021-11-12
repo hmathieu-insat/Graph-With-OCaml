@@ -53,7 +53,6 @@ val n_iter_sorted: 'a graph -> (id -> unit) -> unit
 (* Fold on all (unsorted) nodes. You must remember what List.fold_left does. *)
 val n_fold: 'a graph -> ('b -> id -> 'b) -> 'b -> 'b
 
-
 (* Iter on all arcs (edges) *)
 val e_iter: 'a graph -> (id -> id -> 'a -> unit) -> unit
 
