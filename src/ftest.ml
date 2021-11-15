@@ -30,7 +30,8 @@ let () =
   let graph = from_file infile in
 
   (* Tests *)
-  let graph2 = clone_nodes graph in
+  (* let graph2 = clone_nodes graph in *)
+  let graph2 = gmap (clone_nodes graph) (fun x->x^"99") in
 
   (* Rewrite the graph that has been read. *)
   let () = write_file outfile graph2 in
