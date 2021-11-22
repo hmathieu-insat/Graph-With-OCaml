@@ -20,14 +20,13 @@ open Tools
 let rec find_path gr forbidden id1 id2 path =
   let arcs = out_arcs gr id1 in
   
-    let rec loop arcs forbidden path =
+    let rec loop arcs forbidden =
       match arcs with 
-        | (id,_) when id=id2 -> Some(id2::path)
-        | [] -> forbidden
-        | (id,_)::reste -> loop reste (id::forbidden) (id::path)
+        | (id,_) when id=id2 -> id2
+        | [] -> []
+        | (id,_)::reste -> loop reste (id::forbidden)
     in
   
-    loop arcs forbidden path
-    (* find_path *)
-  ;;
+  Some((find_path gr forbidden id1 id2 (loop arcs forbidden path))::path)
+;;
     
