@@ -99,7 +99,7 @@ let from_file path =
   close_in infile ;
   final_graph
 
-  
+
 let export path gr =
   (* Open a write-file. *)
   let ff = open_out path in
@@ -112,7 +112,7 @@ let export path gr =
 
   (* Write all arcs *)
   e_iter gr (fun id1 id2 lbl -> 
-    fprintf ff "%d -> %d [label = \"%s\"];" id1 id2 lbl) ;
+      fprintf ff "%d -> %d [label = \"%s\"];" id1 id2 lbl) ;
 
   fprintf ff "}" ;
   close_out ff ;

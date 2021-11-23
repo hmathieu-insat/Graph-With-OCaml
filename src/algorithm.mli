@@ -10,9 +10,9 @@ type path = id list
  *   returns Some p if a path p from id1 to id2 has been found. 
  *
  *  forbidden is a list of forbidden nodes (they have already been visited)
- *)
- val big_find_path: int graph -> id list -> id -> id -> path
+*)
+val big_find_path: int graph -> id list -> id -> id -> path
 
- val find_min_capa: path -> int
+val find_min_capa: int graph -> path -> int
 
- val ret_arcs: int graph -> path -> int -> int graph
+val ret_arcs: int graph -> path -> int -> int graph
