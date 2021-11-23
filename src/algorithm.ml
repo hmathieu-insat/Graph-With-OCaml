@@ -13,8 +13,8 @@ let rec find_path gr forbidden id1 id2  =
         | (id,_)::reste when (List.exists (fun x->x=id) forbidden) -> loop reste forbidden
         | (id,_)::reste when id=id2 -> [id2]
         | (id,_)::reste -> 
-          match (find_path gr forbidden id id2) with
-            | [] -> loop reste (id::forbidden)
+          match (find_path gr (id::forbidden) id id2) with
+            | [] -> loop reste forbidden
             | x  -> id::x
     in
   loop arcs forbidden
@@ -33,7 +33,7 @@ let find_min_capa path = match path with
     let rec loop acu = function
       | [] -> acu
       | hd::tl when hd >= acu -> loop acu tl
-      | hd::tl when hd < acu -> loop hd tl
+      | _ -> loop hd tl
   in
   loop hd path
 ;;
