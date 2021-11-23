@@ -20,12 +20,9 @@ let rec find_path gr forbidden id1 id2  =
   loop arcs forbidden
 ;;
 
-(* 1 - trouver le plus petit flow d'un arc sur un chemin
-2 - décrémenter chaque arc du chemin de (flow min)
-3 - construire arc retour
+(* 2 - décrémenter chaque arc du chemin de (flow min)  construire arc retour
 4 - ford fulkerson
 (se termine quand y'a plus de chemin) *)
-
 
 let find_min_capa path = match path with
   | [] -> -1
@@ -36,4 +33,14 @@ let find_min_capa path = match path with
       | _ -> loop hd tl
   in
   loop hd path
+;;
+
+let rec ret_arcs graph path capa = 
+  match path with 
+  | [] -> graph
+  | _::[] -> graph
+  | x1::x2::reste -> 
+      let graph1 = add_arc graph x1 x2 (-capa) in (* L'ALLER *)
+      let graph2 = add_arc graph1 x2 x1 capa  in (* LE RETOUR *)
+      ret_arcs graph2 (x2::reste) capa
 ;;
