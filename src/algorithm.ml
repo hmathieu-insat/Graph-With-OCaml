@@ -2,6 +2,8 @@ open Graph
 open Gfile
 open Tools
 
+type path = id list
+
 (* let find_path gr forbidden id1 id2 =
   let arcs = out_arcs gr id1 in
 

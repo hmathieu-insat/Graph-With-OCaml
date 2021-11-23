@@ -36,8 +36,8 @@ let () =
   let graph = add_arc graph 2 4 9999 in
 
 
-  let chemin = find_path graph [] 0 2 in
-  (* iter Printf.printf "%d\n%!" chemin; *)
+  let chemin = find_path graph [1] 0 5 in
+  List.iter (Printf.printf "%d\n%!") chemin;
 
   
   (* Rewrite the graph that has been read. *)
