@@ -38,8 +38,8 @@ let () =
 
   let chemin = big_find_path graph [1] 0 5 in
   List.iter (Printf.printf "->%d%!") chemin;
-  let capa = find_min_capa chemin in
 
+  let capa = find_min_capa chemin in
   let graph = ret_arcs graph chemin capa in 
   
   (* Rewrite the graph that has been read. *)
