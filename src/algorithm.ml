@@ -34,4 +34,15 @@ let rec find_path gr forbidden id1 id2  =
     in
   loop arcs forbidden
 ;;
-    
+
+
+let find_min_capa path = match path with
+  | [] -> -1
+  | hd::tl ->
+    let rec loop acu = function
+      | [] -> acu
+      | hd::tl when hd >= acu -> loop acu tl
+      | hd::tl when hd < acu -> loop hd tl
+  in
+  loop hd path
+;;
