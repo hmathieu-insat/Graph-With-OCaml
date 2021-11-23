@@ -34,4 +34,10 @@ let rec find_path gr forbidden id1 id2  =
     in
   loop arcs forbidden
 ;;
-    
+
+(* 1 - trouver le plus petit flow d'un arc sur un chemin
+2 - décrémenter chaque arc du chemin de (flow min)
+3 - construire arc retour
+4 - ford fulkerson
+(se termine quand y'a plus de chemin) *)
+

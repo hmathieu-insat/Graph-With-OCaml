@@ -33,16 +33,16 @@ let () =
   (* Tests *)
   (* let graph2 = clone_nodes graph in *)
   let graph = gmap graph (fun x-> int_of_string x) in
-  let graph = add_arc graph 2 4 9999 in
+  
+  (* let graph = add_arc graph 2 4 9999 in *)
 
-
-  let chemin = find_path graph [1;2] 0 5 in
+  let chemin = find_path graph [] 0 2 in
   List.iter (Printf.printf "%d\n%!") chemin;
-
   
   (* Rewrite the graph that has been read. *)
   let graph = gmap graph (fun x-> string_of_int x) in
-  (* let () = export outfile graph in *)
+
+  (* let () = export "out2" graph in *)
   let () = write_file outfile graph in
 
   ()
