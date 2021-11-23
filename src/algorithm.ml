@@ -27,7 +27,8 @@ let big_find_path gr forbidden id1 id2 =
 4 - ford fulkerson
 (se termine quand y'a plus de chemin) *)
 
-let find_min_capa path = match path with
+let find_min_capa path = 
+  match path with
   | [] -> -1
   | hd::tl ->
     let rec loop acu = function
