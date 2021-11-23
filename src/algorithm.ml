@@ -4,20 +4,23 @@ open Tools
 
 type path = id list
 
-let rec find_path gr forbidden id1 id2  =
-  let arcs = out_arcs gr id1 in
-  
-    let rec loop arcs forbidden =
-      match arcs with 
-        | [] -> []
-        | (id,_)::reste when (List.exists (fun x->x=id) forbidden) -> loop reste forbidden
-        | (id,_)::reste when id=id2 -> [id2]
-        | (id,_)::reste -> 
-          match (find_path gr (id::forbidden) id id2) with
-            | [] -> loop reste forbidden
-            | x  -> id::x
+let big_find_path gr forbidden id1 id2 =
+  let rec find_path gr forbidden id1 id2 =
+    let arcs = out_arcs gr id1 in
+    
+      let rec loop arcs forbidden =
+        match arcs with 
+          | [] -> []
+          | (id,_)::reste when (List.exists (fun x->x=id) forbidden) -> loop reste forbidden
+          | (id,_)::reste when id=id2 -> [id2]
+          | (id,_)::reste -> 
+            match (find_path gr (id::forbidden) id id2) with
+              | [] -> loop reste forbidden
+              | x  -> id::x
+      in
+    loop arcs forbidden
     in
-  loop arcs forbidden
+    id1::(find_path gr forbidden id1 id2)
 ;;
 
 (* 2 - décrémenter chaque arc du chemin de (flow min)  construire arc retour
