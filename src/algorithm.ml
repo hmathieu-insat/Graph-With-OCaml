@@ -25,11 +25,11 @@ let rec find_path gr forbidden id1 id2  =
     let rec loop arcs forbidden =
       match arcs with 
         | [] -> []
+        | (id,_)::reste when (List.exists (fun x->x=id) forbidden) -> loop reste forbidden
         | (id,_)::reste when id=id2 -> [id2]
         | (id,_)::reste -> 
           match (find_path gr forbidden id id2) with
             | [] -> loop reste (id::forbidden)
-            | (id,_)::reste when (List.exists (fun x->x=id) forbidden) -> []
             | x  -> id::x
     in
   loop arcs forbidden
