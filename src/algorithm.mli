@@ -16,3 +16,5 @@ val big_find_path: int graph -> id list -> id -> id -> path
 val find_min_capa: int graph -> path -> int
 
 val ret_arcs: int graph -> path -> int -> int graph
+
+val algo_FF: int graph -> id -> id -> int graph

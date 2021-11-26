@@ -51,3 +51,12 @@ let rec ret_arcs graph path capa =
     let graph1 = add_arc graph x1 x2 (-capa) in (* L'ALLER *)
     let graph2 = add_arc graph1 x2 x1 capa  in (* LE RETOUR *)
     ret_arcs graph2 (x2::reste) capa
+
+
+let rec algo_FF graph s p =
+  let path = big_find_path graph [] s p in
+  let capa = find_min_capa graph path in
+  match capa with
+    | 0 -> graph
+    | _ -> algo_FF (ret_arcs graph path capa) s p
+  
