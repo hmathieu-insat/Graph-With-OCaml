@@ -36,12 +36,15 @@ let () =
 
   (* let graph = add_arc graph 2 4 9999 in *)
 
-  let chemin = big_find_path graph [1;3] 0 5 in
+  let chemin = big_find_path graph [] 0 2 in
   List.iter (Printf.printf "->%d%!") chemin;
 
   let capa = find_min_capa graph chemin in
-  Printf.printf "\n %d %!" capa;
+  Printf.printf "\nCapa : %d \n%!" capa;
   let graph = ret_arcs graph chemin capa in 
+
+  let chemin = big_find_path graph [] 0 2 in
+  List.iter (Printf.printf "->%d%!") chemin;
 
   (* Rewrite the graph that has been read. *)
   let graph = gmap graph (fun x-> string_of_int x) in
