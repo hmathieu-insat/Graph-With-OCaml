@@ -11,6 +11,7 @@ let big_find_path gr forbidden id1 id2 =
     let rec loop arcs forbidden =
       match arcs with 
       | [] -> []
+      | (_,0)::reste -> loop reste forbidden
       | (id,_)::reste when (List.exists (fun x->x=id) forbidden) -> loop reste forbidden
       | (id,_)::reste when id=id2 -> [id2]
       | (id,_)::reste -> 

@@ -36,10 +36,10 @@ let () =
 
   (* let graph = add_arc graph 2 4 9999 in *)
 
-  let chemin = big_find_path graph [3;1] 0 5 in
+  let chemin = big_find_path graph [1;3] 0 5 in
   List.iter (Printf.printf "->%d%!") chemin;
 
-  let capa = find_min_capa graph [3;1] in
+  let capa = find_min_capa graph chemin in
   Printf.printf "\n %d %!" capa;
   let graph = ret_arcs graph chemin capa in 
 
