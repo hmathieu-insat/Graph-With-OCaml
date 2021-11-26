@@ -56,7 +56,7 @@ let rec ret_arcs graph path capa =
 let rec algo_FF graph s p =
   let path = big_find_path graph [] s p in
   let capa = find_min_capa graph path in
-  match path with
-  | [] -> graph
+  match capa with
+  | 0 -> graph
   | _ -> algo_FF (ret_arcs graph path capa) s p
   
