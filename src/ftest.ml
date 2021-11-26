@@ -34,7 +34,11 @@ let () =
   (* let graph2 = clone_nodes graph in *)
   let graph = gmap graph (fun x-> int_of_string x) in
 
+  (* TESTS PRELIMINAIRES *)
+
   (* let graph = add_arc graph 2 4 9999 in *)
+
+  (* 1ERE ITERATION *)
 
   let chemin = big_find_path graph [] 0 2 in
   List.iter (Printf.printf "->%d%!") chemin;
@@ -43,8 +47,13 @@ let () =
   Printf.printf "\nCapa : %d \n%!" capa;
   let graph = ret_arcs graph chemin capa in 
 
+  (* 2eme ITERATION *)
+
   let chemin = big_find_path graph [] 0 2 in
   List.iter (Printf.printf "->%d%!") chemin;
+
+  let capa = find_min_capa graph path in
+  Printf.printf "\nCapa : %d \n%!" capa;
 
   (* Rewrite the graph that has been read. *)
   let graph = gmap graph (fun x-> string_of_int x) in
