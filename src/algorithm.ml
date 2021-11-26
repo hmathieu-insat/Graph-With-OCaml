@@ -30,8 +30,8 @@ let big_find_path gr forbidden id1 id2 =
 
 let find_min_capa graph path = 
   match path with
-  | [] -> raise Not_found
-  | _::[] -> raise Not_found
+  | [] -> 0
+  | _::[] -> 0
   | hd::tl -> let rec loop acu = function
       | [] -> -1 (* Unnecessary pattern-matching here, written solely to please ocaml compilator *) 
       | _::[] -> acu
@@ -56,7 +56,7 @@ let rec ret_arcs graph path capa =
 let rec algo_FF graph s p =
   let path = big_find_path graph [] s p in
   let capa = find_min_capa graph path in
-  match capa with
-    | 0 -> graph
-    | _ -> algo_FF (ret_arcs graph path capa) s p
+  match path with
+  | [] -> graph
+  | _ -> algo_FF (ret_arcs graph path capa) s p
   
