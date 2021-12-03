@@ -1,3 +1,5 @@
 open Hackparser
 
-read_line "toto 1,2,4,8;" []
+(* let res = read_idlits "1 2 4 8" [];;
+List.iter (Printf.printf "%d\n%!") res *)
+
