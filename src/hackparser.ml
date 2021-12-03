@@ -11,19 +11,25 @@ let empty_structure = {[];[]}
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file" *)
 
-let 
+let rec read_line str acu
+    match line with
+    | ";" -> acu
+    | hd::tl when Str.string_match (Str.regexp "[0-9]") hd 0 -> read_line tl acu::(int_of_string hd)
+    | _ -> read_line tl acu
 
-  (* Reads a line with a node. *)
-  let read_lit id structure line =
-    try Scanf.sscanf line "l %d %s %d" (fun id nom flow -> 
-        {hackers:structure.hackers;
-         lits:structure.lits::{
-             id:id;
-             nom:nom;
-             flow:flow}})
-    with e ->
-      Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
-      failwith "from_file"
+      (* String : "1,2,3" *)
+
+(* Reads a line with a node. *)
+let read_lit id structure line =
+  try Scanf.sscanf line "l %d %s %d" (fun id nom flow -> 
+      {hackers:structure.hackers;
+        lits:structure.lits::{
+            id:id;
+            nom:nom;
+            flow:flow}})
+  with e ->
+    Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
+    failwith "from_file"
 
 (* PRENDS TOUS LE FICHIER ET LE METS DANS UNE STRUCTURE *)
 let from_file path =
