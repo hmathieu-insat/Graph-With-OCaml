@@ -21,6 +21,12 @@ let read_hacker id structure line =
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
 
+let rec read_line str acu
+    match line with
+    | ";" -> acu
+    | hd::tl when Str.string_match (Str.regexp "[0-9]") hd 0 -> read_line tl acu::(int_of_string hd)
+    | _ -> read_line tl acu
+
 (* PRENDS TOUS LES LITS ET LES METS DANS UNE STRUCTURE *)
 let read_lit id structure line =
   try Scanf.sscanf line "l %d %s %d" (fun id nom capa -> 
