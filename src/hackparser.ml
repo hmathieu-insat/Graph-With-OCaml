@@ -2,7 +2,15 @@ type hacker_record  = {idh : int; nomh : string; litsid : int list}
 type lit_record     = {idl : int; noml : string; capa : int}
 type structure      = {hackers : hacker_record list; lits : lit_record list}
 
-let empty_structure = {[];[]}
+type path = string
+
+let empty_structure = {hackers=[];lits=[]}
+
+(* PRENDS TOUT APRES UN HACKER POUR AVOIR LA LISTE DES LITS *)
+let rec read_idlits str acu = 
+  let str = String.trim str in
+  if str = "" then acu
+  else Scanf.sscanf str "%d %s@;" (fun idl reste -> read_idlits reste (idl::acu))
 
 (* PRENDS TOUS LES HACKERS ET LES METS DANS UNE STRUCTURE *)
 let read_hacker id structure line =
@@ -12,8 +20,8 @@ let read_hacker id structure line =
       { 
         idh = id;
         nomh = nom;
-        litsid = (read_line args [])
-      } ::structure.hackers};
+        litsid = (read_idlits args [])
+      } ::structure.hackers;
 
       lits = structure.lits
     })
@@ -21,14 +29,8 @@ let read_hacker id structure line =
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
 
-let rec read_line str acu
-    match line with
-    | ";" -> acu
-    | hd::tl when Str.string_match (Str.regexp "[0-9]") hd 0 -> read_line tl acu::(int_of_string hd)
-    | _ -> read_line tl acu
-
 (* PRENDS TOUS LES LITS ET LES METS DANS UNE STRUCTURE *)
-let read_lit id structure line =
+let read_lit structure line =
   try Scanf.sscanf line "l %d %s %d" (fun id nom capa -> 
     {
       hackers = structure.hackers;
@@ -41,6 +43,13 @@ let read_lit id structure line =
     })
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
+    failwith "from_file"
+
+(* ON REPREND LE READCOMMENT DU GFILE *)
+let read_comment graph line =
+  try Scanf.sscanf line " %%" graph
+  with _ ->
+    Printf.printf "Unknown line:\n%s\n%!" line ;
     failwith "from_file"
 
 (* PRENDS TOUS LE FICHIER ET LE METS DANS UNE STRUCTURE *)
@@ -63,8 +72,8 @@ let from_file path =
 
         (* The first character of a line determines its content : n or e. *)
         else match line.[0] with
-          | 'l' -> (n, read_lit n structure line)
-          | 'h' -> (n+1, read_hacker structure line)
+          | 'l' -> (n, read_lit structure line)
+          | 'h' -> (n+1, read_hacker n structure line)
 
           (* It should be a comment, otherwise we complain. *)
           | _ -> (n, read_comment structure line)
