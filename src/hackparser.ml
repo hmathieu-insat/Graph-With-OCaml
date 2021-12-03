@@ -1,17 +1,22 @@
-type hacker_record  = {id:int;nom:string;litsid:int list}
-type lit_record     = {id:int;nom:string;flow:int}
+type hacker_record  = {idh:int;nomh:string;litsid:int list}
+type lit_record     = {idl:int;noml:string;capa:int}
 type structure      = {hackers:hacker_record list; lits:lit_record list}
 
 let empty_structure = {[];[]}
 
 (* PRENDS TOUS LES HACKERS ET LES METS DANS UNE STRUCTURE *)
 let read_hacker id structure line =
-  try Scanf.sscanf line "h %s:%s" (fun nom args -> 
-    {hackers:structure.hackers::
-      {id:id;
-        nom:nom;
-        litsid:(read_line "" args)};
-    lits:structure.lits})
+  try Scanf.sscanf line "h %s@:%s" (fun nom args -> 
+    { 
+      hackers =
+      { 
+        idh = id;
+        nomh = nom;
+        litsid = (read_line args [])
+      } ::structure.hackers};
+
+      lits = structure.lits
+    })
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
@@ -24,12 +29,16 @@ let rec read_line str acu
 
 (* PRENDS TOUS LES LITS ET LES METS DANS UNE STRUCTURE *)
 let read_lit id structure line =
-  try Scanf.sscanf line "l %d %s %d" (fun id nom flow -> 
-    {hackers:structure.hackers;
-    lits:structure.lits::{
-      id:id;
-      nom:nom;
-      flow:flow}})
+  try Scanf.sscanf line "l %d %s %d" (fun id nom capa -> 
+    {
+      hackers = structure.hackers;
+      lits =
+        { 
+          idl = (-id);
+          noml = nom;
+          capa = capa
+        } :: structure.lits
+    })
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
