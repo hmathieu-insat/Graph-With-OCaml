@@ -41,19 +41,19 @@ let () =
   (* 1ERE ITERATION *)
 
   (* let chemin = big_find_path graph [] 0 2 in
-  List.iter (Printf.printf "->%d%!") chemin;
+     List.iter (Printf.printf "->%d%!") chemin;
 
-  let capa = find_min_capa graph chemin in
-  Printf.printf "\nCapa : %d \n%!" capa;
-  let graph = ret_arcs graph chemin capa in  *)
+     let capa = find_min_capa graph chemin in
+     Printf.printf "\nCapa : %d \n%!" capa;
+     let graph = ret_arcs graph chemin capa in  *)
 
   (* 2eme ITERATION *)
 
   (* let chemin = big_find_path graph [] 0 2 in
-  List.iter (Printf.printf "->%d%!") chemin;
+     List.iter (Printf.printf "->%d%!") chemin;
 
-  let capa = find_min_capa graph chemin in
-  Printf.printf "\nCapa : %d \n%!" capa; *)
+     let capa = find_min_capa graph chemin in
+     Printf.printf "\nCapa : %d \n%!" capa; *)
 
   let graph = algo_FF graph 0 5 in
 

@@ -4,22 +4,26 @@ type structure      = {hackers:hacker_record list; lits:lit_record list}
 
 let empty_structure = {[];[]}
 
-
 (* Reads a line with a node. *)
-let read_hacker id structure line =
-  try Scanf.sscanf line "n %f %f" (fun _ _ -> new_node structure id)
-  with e ->
+(* let read_hacker id structure line =
+   try Scanf.sscanf line "h %s %f" (fun _ _ -> new_node structure id)
+   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
-    failwith "from_file"
+    failwith "from_file" *)
 
+let 
 
-(* Reads a line with a node. *)
-let read_lit id structure line =
-  try Scanf.sscanf line "n %f %f" (fun _ _ -> new_node structure id)
-  with e ->
-    Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
-    failwith "from_file"
-
+  (* Reads a line with a node. *)
+  let read_lit id structure line =
+    try Scanf.sscanf line "l %d %s %d" (fun id nom flow -> 
+        {hackers:structure.hackers;
+         lits:structure.lits::{
+             id:id;
+             nom:nom;
+             flow:flow}})
+    with e ->
+      Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
+      failwith "from_file"
 
 (* PRENDS TOUS LE FICHIER ET LE METS DANS UNE STRUCTURE *)
 let from_file path =
@@ -41,8 +45,8 @@ let from_file path =
 
         (* The first character of a line determines its content : n or e. *)
         else match line.[0] with
-          | 'l' -> (n+1, read_lit n structure line)
-          | 'h' -> (n, read_hacker structure line)
+          | 'l' -> (n, read_lit n structure line)
+          | 'h' -> (n+1, read_hacker structure line)
 
           (* It should be a comment, otherwise we complain. *)
           | _ -> (n, read_comment structure line)

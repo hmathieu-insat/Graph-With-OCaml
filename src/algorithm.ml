@@ -59,4 +59,3 @@ let rec algo_FF graph s p =
   match capa with
   | 0 -> graph
   | _ -> algo_FF (ret_arcs graph path capa) s p
-  
