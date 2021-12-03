@@ -4,12 +4,17 @@ type structure      = {hackers:hacker_record list; lits:lit_record list}
 
 let empty_structure = {[];[]}
 
-(* Reads a line with a node. *)
-(* let read_hacker id structure line =
-   try Scanf.sscanf line "h %s %f" (fun _ _ -> new_node structure id)
-   with e ->
+(* PRENDS TOUS LES HACKERS ET LES METS DANS UNE STRUCTURE *)
+let read_hacker id structure line =
+  try Scanf.sscanf line "h %s:%s" (fun nom args -> 
+    {hackers:structure.hackers::
+      {id:id;
+        nom:nom;
+        litsid:(read_line "" args)};
+    lits:structure.lits})
+  with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
-    failwith "from_file" *)
+    failwith "from_file"
 
 let rec read_line str acu
     match line with
@@ -17,16 +22,14 @@ let rec read_line str acu
     | hd::tl when Str.string_match (Str.regexp "[0-9]") hd 0 -> read_line tl acu::(int_of_string hd)
     | _ -> read_line tl acu
 
-      (* String : "1,2,3" *)
-
-(* Reads a line with a node. *)
+(* PRENDS TOUS LES LITS ET LES METS DANS UNE STRUCTURE *)
 let read_lit id structure line =
   try Scanf.sscanf line "l %d %s %d" (fun id nom flow -> 
-      {hackers:structure.hackers;
-        lits:structure.lits::{
-            id:id;
-            nom:nom;
-            flow:flow}})
+    {hackers:structure.hackers;
+    lits:structure.lits::{
+      id:id;
+      nom:nom;
+      flow:flow}})
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
