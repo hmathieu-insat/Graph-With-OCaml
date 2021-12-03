@@ -7,12 +7,16 @@ let empty_structure = {[];[]}
 (* PRENDS TOUS LES HACKERS ET LES METS DANS UNE STRUCTURE *)
 let read_hacker id structure line =
   try Scanf.sscanf line "h %s@:%s" (fun nom args -> 
-    { hackers =
-      { idh = id;
+    { 
+      hackers =
+      { 
+        idh = id;
         nomh = nom;
-        litsid = (read_line [] args)}
-        ::structure.hackers};
-    lits = structure.lits})
+        litsid = (read_line [] args)
+      } ::structure.hackers};
+      
+      lits = structure.lits
+    })
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
@@ -20,13 +24,15 @@ let read_hacker id structure line =
 (* PRENDS TOUS LES LITS ET LES METS DANS UNE STRUCTURE *)
 let read_lit id structure line =
   try Scanf.sscanf line "l %d %s %d" (fun id nom capa -> 
-    {hackers = structure.hackers;
-    lits =
-      { idl = (-id);
-        noml = nom;
-        capa = capa}
-        :: structure.lits
-        })
+    {
+      hackers = structure.hackers;
+      lits =
+        { 
+          idl = (-id);
+          noml = nom;
+          capa = capa
+        } :: structure.lits
+    })
   with e ->
     Printf.printf "Cannot read node in line - %s:\n%s\n%!" (Printexc.to_string e) line ;
     failwith "from_file"
