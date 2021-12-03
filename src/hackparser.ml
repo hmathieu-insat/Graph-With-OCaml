@@ -12,9 +12,9 @@ let read_hacker id structure line =
       { 
         idh = id;
         nomh = nom;
-        litsid = (read_line [] args)
+        litsid = (read_line args [])
       } ::structure.hackers};
-      
+
       lits = structure.lits
     })
   with e ->
