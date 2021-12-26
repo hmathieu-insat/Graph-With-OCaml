@@ -1,4 +1,6 @@
+open Gfile
 open Hackparser
+open Tools
 
 (* Test fonction read_idlits *)
 
@@ -30,3 +32,12 @@ Printf.printf "%d %s %d\n%!" lit.idl lit.noml lit.capa
 let hacker = List.nth res.hackers id ;;
 Printf.printf "%d %s\n%!" hacker.idh hacker.nomh;;
 List.iter (Printf.printf "%d\n%!") hacker.litsid;; *)
+
+(* Test de conversion struct->graph *)
+let structure = from_file "graphs/hackersleep";;
+let graph = structure_to_graph structure;;
+
+let graph = gmap graph (fun x-> string_of_int x) in
+let () = export "outhacker" graph in
+
+()
