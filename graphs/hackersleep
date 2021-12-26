@@ -1,7 +1,7 @@
-l 0 ecole 3
-l 1 jardin 5
-l 2 baignoir 1
+l 1 ecole 3
+l 2 jardin 5
+l 3 baignoir 1
 
-h Hugo:0 1;
-h Thomas:2;
-h Antoine:1;
+h Hugo:1 2;
+h Thomas:3;
+h Antoine:2;

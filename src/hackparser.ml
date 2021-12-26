@@ -103,19 +103,23 @@ let rec hacker_arcs idh litsid graph =
     hacker_arcs idh reste graph
 
 (* CONVERTIR LISTE DE HACKERS EN NODES + ARCS *)
-let hackers_to_graph hackers graph =
+let rec hackers_to_graph hackers graph =
   match hackers with 
   | [] -> graph
   | hacker::reste -> 
     let graph = hacker_node hacker graph in
     let graph = hacker_arcs hacker.idh hacker.litsid graph in
+    let graph = hackers_to_graph reste graph in 
     graph
 
 (* CONVERTIR LISTE DE LITS EN NODES *)
 let rec lits_to_graph lits graph = 
   match lits with 
   | [] -> graph
-  | lit::reste -> new_node graph lit.idl
+  | lit::reste -> 
+    let graph = new_node graph lit.idl in 
+    let graph = lits_to_graph reste graph in 
+    graph
 
 (* CONVERTIR STRUCTURE EN GRAPH *)
 let structure_to_graph structure =
