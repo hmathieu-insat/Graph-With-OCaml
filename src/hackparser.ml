@@ -101,5 +101,6 @@ let rec lits_to_graph lits graph =
 (* CONVERTIR STRUCTURE EN GRAPH *)
 let structure_to_graph structure =
   let graph = empty_graph in 
-  lits_to_graph structure.lits graph
-  hackers_to_graph structure.hackers graph
+  let graph = lits_to_graph structure.lits graph in 
+  let graph = hackers_to_graph structure.hackers graph in
+  graph
