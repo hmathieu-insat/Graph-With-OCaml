@@ -1,3 +1,5 @@
+open Graph
+
 type hacker_record  = {idh : int; nomh : string; litsid : int list}
 type lit_record     = {idl : int; noml : string; capa : int}
 type structure      = {hackers : hacker_record list; lits : lit_record list}
@@ -88,4 +90,4 @@ let from_file path =
   final_structure
 
 
-let structure_to_graph structure graph =
+(* let structure_to_graph structure graph = *)
