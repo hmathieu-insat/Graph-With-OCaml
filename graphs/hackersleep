@@ -1,6 +1,9 @@
-l 1 ecole 2
+l 1 ecole 3
 l 2 baignoir 1
+l 3 bacasable 1
 
 h Hugo:1;
 h Antoine:1 2;
 h Thomas:1;
+h Santiago:3 2;
+h Jean:1;

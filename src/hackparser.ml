@@ -94,7 +94,7 @@ let from_file path =
 (* S'OCCUPE DES NODES *)
 let hacker_node hacker graph = 
   let graph = new_node graph hacker.idh in 
-  let graph = add_arc graph 100 hacker.idh 1 in 
+  let graph = add_arc graph max_int hacker.idh 1 in 
   graph
 
 (* S'OCCUPE DES ARCS *)
@@ -123,15 +123,15 @@ let rec lits_to_graph lits graph =
   | lit::reste -> 
     let graph = new_node graph lit.idl in 
     let graph = lits_to_graph reste graph in 
-    let graph = add_arc graph lit.idl (-100) lit.capa in
+    let graph = add_arc graph lit.idl min_int lit.capa in
     graph
 
 (* CONVERTIR STRUCTURE EN GRAPH *)
 let structure_to_graph structure =
   let graph = empty_graph in 
 
-  let graph = new_node graph 100 in (* Source *)
-  let graph = new_node graph (-100) in (* Puit *)
+  let graph = new_node graph max_int in (* Source *)
+  let graph = new_node graph min_int in (* Puit *)
 
   let graph = lits_to_graph structure.lits graph in 
   let graph = hackers_to_graph structure.hackers graph in
@@ -145,7 +145,7 @@ let rec where_sleep hackers lits graph =
     let rec loop arclist = match arclist with
     | [] -> where_sleep hackers reste graph
     | (_, label)::tl when (label == 0) -> loop tl
-    | (destnode, _)::tl when (destnode == -100) -> loop tl
+    | (destnode, _)::tl when (destnode == min_int) -> loop tl
     | (destnode, _)::tl -> 
       let hacker = (List.nth hackers destnode) in 
       Printf.printf "%s dors à %s\n%!" hacker.nomh lit.noml; loop tl
@@ -159,6 +159,6 @@ let solve_hacker path =
     lits = List.rev structure.lits} in
 
   let graph = structure_to_graph structure in 
-  let graph = algo_FF graph 100 (-100) in
+  let graph = algo_FF graph max_int min_int in
   let graph = where_sleep structure.hackers structure.lits graph in
   graph
