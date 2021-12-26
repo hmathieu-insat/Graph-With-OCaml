@@ -4,6 +4,8 @@ type structure      = {hackers : hacker_record list; lits : lit_record list}
 
 type path = string
 
+val empty_structure : structure
+
 (* Values are read and put in a struct *)
 val from_file: path -> structure
 

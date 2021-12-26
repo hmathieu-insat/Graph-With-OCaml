@@ -3,7 +3,6 @@ type lit_record     = {idl : int; noml : string; capa : int}
 type structure      = {hackers : hacker_record list; lits : lit_record list}
 
 type path = string
-
 let empty_structure = {hackers=[];lits=[]}
 
 (* PRENDS TOUT APRES UN HACKER POUR AVOIR LA LISTE DES LITS *)
