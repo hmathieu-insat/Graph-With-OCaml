@@ -1,5 +1,6 @@
 open Graph
 open Tools
+open Algorithm
 
 type hacker_record  = {idh : int; nomh : string; litsid : int list}
 type lit_record     = {idl : int; noml : string; capa : int}
@@ -93,7 +94,7 @@ let from_file path =
 (* S'OCCUPE DES NODES *)
 let hacker_node hacker graph = 
   let graph = new_node graph hacker.idh in 
-  let graph = add_arc graph hacker.idh 100 1 in 
+  let graph = add_arc graph 100 hacker.idh 1 in 
   graph
 
 (* S'OCCUPE DES ARCS *)
@@ -134,4 +135,11 @@ let structure_to_graph structure =
 
   let graph = lits_to_graph structure.lits graph in 
   let graph = hackers_to_graph structure.hackers graph in
+  graph
+
+(* RESOLUTION TOTALE *)
+let solve_hacker path = 
+  let structure = from_file path in 
+  let graph = structure_to_graph structure in 
+  let graph = algo_FF graph 100 (-100) in
   graph

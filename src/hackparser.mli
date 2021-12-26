@@ -15,3 +15,5 @@ val read_hacker: int -> structure -> string -> structure
 val read_lit   : structure -> string -> structure
 
 val structure_to_graph : structure -> int graph
+
+val solve_hacker : string -> int graph
