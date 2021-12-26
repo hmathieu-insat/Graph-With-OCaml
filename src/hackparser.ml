@@ -142,11 +142,12 @@ let rec where_sleep hackers lits graph =
   match lits with
   | [] -> ();
   | lit::reste -> let arcs = out_arcs graph lit.idl in
-    let rec loop arclist = match arclist with
-    | [] -> where_sleep hackers reste graph
-    | destnode::tl when (destnode == 100) -> loop tl
-    | destnode::tl -> Printf.printf "%s dors à %s" (List.nth hackers (-arc - 1).nomh) lit.noml; loop tl
-    in loop arcs
+    let rec loop arclist = 
+      match arclist with
+      | [] -> where_sleep hackers reste graph
+      | destnode::tl when (destnode == 100) -> loop tl
+      | destnode::tl -> Printf.printf "%s dors à %s" (List.nth hackers (-destnode - 1)).nomh lit.noml; loop tl
+    loop arcs
 
 (* RESOLUTION TOTALE *)
 let solve_hacker path = 
