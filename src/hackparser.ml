@@ -147,6 +147,7 @@ let rec where_sleep hackers lits graph =
       | [] -> where_sleep hackers reste graph
       | destnode::tl when (destnode == 100) -> loop tl
       | destnode::tl -> Printf.printf "%s dors à %s" (List.nth hackers (-destnode - 1)).nomh lit.noml; loop tl
+    ;;
     loop arcs
 
 (* RESOLUTION TOTALE *)
@@ -154,4 +155,4 @@ let solve_hacker path =
   let structure = from_file path in 
   let graph = structure_to_graph structure in 
   let graph = algo_FF graph 100 (-100) in
-  graph
+  where_sleep structure.hackers structure.lits graph
