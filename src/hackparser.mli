@@ -14,4 +14,4 @@ val read_idlits: string -> int list -> int list
 val read_hacker: int -> structure -> string -> structure
 val read_lit   : structure -> string -> structure
 
-val structure_to_graph : structure -> int graph
+val structure_to_graph : structure -> int graph -> int graph
