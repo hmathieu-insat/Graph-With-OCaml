@@ -154,6 +154,10 @@ let rec where_sleep hackers lits graph =
 (* RESOLUTION TOTALE *)
 let solve_hacker path = 
   let structure = from_file path in 
+  let structure = {
+    hackers = List.rev structure.hackers ; 
+    lits = List.rev structure.lits} in
+
   let graph = structure_to_graph structure in 
   let graph = algo_FF graph 100 (-100) in
   let graph = where_sleep structure.hackers structure.lits graph in
