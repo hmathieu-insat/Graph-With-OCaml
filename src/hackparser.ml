@@ -92,7 +92,9 @@ let from_file path =
 
 (* S'OCCUPE DES NODES *)
 let hacker_node hacker graph = 
-  new_node graph hacker.idh
+  let graph = new_node graph hacker.idh in 
+  let graph = add_arc graph hacker.idh max_int 1 in 
+  graph
 
 (* S'OCCUPE DES ARCS *)
 let rec hacker_arcs idh litsid graph = 
@@ -100,7 +102,8 @@ let rec hacker_arcs idh litsid graph =
   | [] -> graph
   | id::reste -> 
     let graph = add_arc graph idh id 1 in
-    hacker_arcs idh reste graph
+    let graph = hacker_arcs idh reste graph in
+    graph
 
 (* CONVERTIR LISTE DE HACKERS EN NODES + ARCS *)
 let rec hackers_to_graph hackers graph =
@@ -119,11 +122,16 @@ let rec lits_to_graph lits graph =
   | lit::reste -> 
     let graph = new_node graph lit.idl in 
     let graph = lits_to_graph reste graph in 
+    let graph = add_arc graph lit.idl min_int lit.capa in
     graph
 
 (* CONVERTIR STRUCTURE EN GRAPH *)
 let structure_to_graph structure =
   let graph = empty_graph in 
+
+  let graph = new_node graph max_int in (* Source *)
+  let graph = new_node graph min_int in (* Puit *)
+
   let graph = lits_to_graph structure.lits graph in 
   let graph = hackers_to_graph structure.hackers graph in
   graph
