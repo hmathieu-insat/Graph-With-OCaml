@@ -35,10 +35,9 @@ List.iter (Printf.printf "%d\n%!") hacker.litsid;; *)
 
 (* Test de conversion struct->graph *)
 
-let () = solve_hacker "graphs/hackersleep" ;;
-()
+let graph = solve_hacker "graphs/hackersleep" ;;
 
-(* let graph = gmap graph (fun x-> string_of_int x) in
+let graph = gmap graph (fun x-> string_of_int x) in
 let () = export "outhacker" graph in
 
-() *)
+()

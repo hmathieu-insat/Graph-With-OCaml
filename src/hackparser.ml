@@ -140,7 +140,7 @@ let structure_to_graph structure =
 (* POUR CHAQUE HACKER PRINT OU IL DORT *)
 let rec where_sleep hackers lits graph =
   match lits with
-  | [] -> ();
+  | [] -> graph;
   | lit::reste -> let arcs = out_arcs graph lit.idl in
     let rec loop arclist = match arclist with
     | [] -> where_sleep hackers reste graph
@@ -155,4 +155,5 @@ let solve_hacker path =
   let structure = from_file path in 
   let graph = structure_to_graph structure in 
   let graph = algo_FF graph 100 (-100) in
-  where_sleep structure.hackers structure.lits graph
+  let graph = where_sleep structure.hackers structure.lits graph in
+  graph
