@@ -13,13 +13,13 @@ let rec read_idlits str acu =
 
 (* PRENDS TOUS LES HACKERS ET LES METS DANS UNE STRUCTURE *)
 let read_hacker id structure line =
-  try Scanf.sscanf line "h %s@:%s" (fun nom args -> 
+  try Scanf.sscanf line "h %s@:%s@;" (fun nom args -> 
     { 
       hackers =
       { 
         idh = id;
         nomh = nom;
-        litsid = (read_idlits args [])
+        litsid = read_idlits args []
       } ::structure.hackers;
 
       lits = structure.lits
