@@ -1,3 +1,5 @@
+open Graph
+
 type hacker_record  = {idh : int; nomh : string; litsid : int list}
 type lit_record     = {idl : int; noml : string; capa : int}
 type structure      = {hackers : hacker_record list; lits : lit_record list}
@@ -87,5 +89,17 @@ let from_file path =
   close_in infile ;
   final_structure
 
+(* CONVERTIR LISTE DE HACKERS EN NODES + ARCS *)
+let rec hackers_to_graph hackers graph =
 
-let structure_to_graph structure graph =
+(* CONVERTIR LISTE DE LITS EN NODES *)
+let rec lits_to_graph lits graph = 
+  match lits with 
+  | [] -> graph
+  | lit::reste -> new_node graph lit.idl
+
+(* CONVERTIR STRUCTURE EN GRAPH *)
+let structure_to_graph structure =
+  let graph = empty_graph in 
+  lits_to_graph structure.lits graph
+  hackers_to_graph structure.hackers graph

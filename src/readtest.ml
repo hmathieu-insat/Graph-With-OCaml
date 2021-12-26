@@ -20,7 +20,7 @@ List.iter (Printf.printf "%d\n%!") hacker.litsid;; *)
 
 (* Test global de from_file *)
 
-let res = from_file "graphs/hackersleep";;
+(* let res = from_file "graphs/hackersleep";;
 
 let id = 1;;
 
@@ -29,4 +29,4 @@ Printf.printf "%d %s %d\n%!" lit.idl lit.noml lit.capa
 
 let hacker = List.nth res.hackers id ;;
 Printf.printf "%d %s\n%!" hacker.idh hacker.nomh;;
-List.iter (Printf.printf "%d\n%!") hacker.litsid;;
+List.iter (Printf.printf "%d\n%!") hacker.litsid;; *)
