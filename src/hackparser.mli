@@ -3,7 +3,6 @@ type lit_record     = {idl : int; noml : string; capa : int}
 type structure      = {hackers : hacker_record list; lits : lit_record list}
 
 type path = string
-
 val empty_structure : structure
 
 (* Values are read and put in a struct *)
