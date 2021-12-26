@@ -155,5 +155,4 @@ let solve_hacker path =
   let structure = from_file path in 
   let graph = structure_to_graph structure in 
   let graph = algo_FF graph 100 (-100) in
-  where_sleep structure.hackers structure.lits graph;
-  graph
+  where_sleep structure.hackers structure.lits graph
