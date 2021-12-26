@@ -10,7 +10,7 @@ let empty_structure = {hackers=[];lits=[]}
 let rec read_idlits str acu = 
   let str = String.trim str in
   if str = "" then acu
-  else Scanf.sscanf str "%d %s@;" (fun idl reste -> read_idlits reste (idl::acu))
+  else Scanf.sscanf str "%d %s@;" (fun idl reste -> read_idlits reste ((-idl)::acu))
 
 (* PRENDS TOUS LES HACKERS ET LES METS DANS UNE STRUCTURE *)
 let read_hacker id structure line =

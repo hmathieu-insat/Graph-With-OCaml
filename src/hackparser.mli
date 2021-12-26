@@ -8,5 +8,5 @@ type path = string
 val from_file: path -> structure
 
 val read_idlits: string -> int list -> int list
-(* val read_hacker:
-val read_lit   :  *)
+val read_hacker: int -> structure -> string -> structure
+val read_lit   : structure -> string -> structure
