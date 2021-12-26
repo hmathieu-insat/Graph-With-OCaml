@@ -139,10 +139,13 @@ let structure_to_graph structure =
 
 (* POUR CHAQUE HACKER PRINT OU IL DORT *)
 let rec where_sleep hackers lits graph =
-  match hackers with
+  match lits with
   | [] -> ();
-  | hacker::reste ->
-    let arcs = out_arcs graph hacker.idh in
+  | lit::reste -> let arcs = out_arcs graph lit.idl in
+    let rec loop arclist = match arclist with
+    | [] -> ()
+    | destnode::tl when (destnode == 100) -> loop tl
+    | destnode::tl -> (* Printf destnode.nomh dort dans lit.noml *)
 
 (* RESOLUTION TOTALE *)
 let solve_hacker path = 
