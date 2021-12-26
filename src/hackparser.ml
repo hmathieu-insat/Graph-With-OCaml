@@ -144,6 +144,7 @@ let rec where_sleep hackers lits graph =
   | lit::reste -> let arcs = out_arcs graph lit.idl in
     let rec loop arclist = match arclist with
     | [] -> where_sleep hackers reste graph
+    | (_, label)::tl when (label == 0) -> loop tl
     | (destnode, _)::tl when (destnode == -100) -> loop tl
     | (destnode, _)::tl -> 
       let hacker = (List.nth hackers destnode) in 
