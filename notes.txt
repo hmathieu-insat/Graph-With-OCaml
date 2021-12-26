@@ -1,0 +1,14 @@
+A makefile provides some useful commands:
+
+    make build to compile. This creates an ftest.native executable
+    make demo to run the ftest program with some arguments
+    make format to indent the entire project
+    make edit to open the project in VSCode
+    make clean to remove build artifacts
+
+In case of trouble with the VSCode extension (e.g. the project does not build, there are strange mistakes), a common workaround is to (1) close vscode, (2) make clean, (3) make build and (4) reopen vscode (make edit).
+
+-------------------
+
+Generate image from dot :
+dot -Tsvg your-dot-file > some-output-file.svg

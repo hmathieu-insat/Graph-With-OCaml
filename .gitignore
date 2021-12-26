@@ -2,3 +2,5 @@ _build/
 ftest.native
 outfile
 *~
+output.svg
+*.native
