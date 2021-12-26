@@ -137,6 +137,13 @@ let structure_to_graph structure =
   let graph = hackers_to_graph structure.hackers graph in
   graph
 
+(* POUR CHAQUE HACKER PRINT OU IL DORT *)
+let rec where_sleep hackers lits graph =
+  match hackers with
+  | [] -> ();
+  | hacker::reste ->
+    let arcs = out_arcs graph hacker.idh in
+
 (* RESOLUTION TOTALE *)
 let solve_hacker path = 
   let structure = from_file path in 
