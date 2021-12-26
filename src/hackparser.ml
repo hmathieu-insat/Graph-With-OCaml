@@ -86,3 +86,6 @@ let from_file path =
 
   close_in infile ;
   final_structure
+
+
+let structure_to_graph structure graph =
